@@ -1,12 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
+    <div class="selector_container">
+        <label class="selector_label">Select color:<input type="color" name="color_selector"
+                id="color_selector"></label>
+        <div class="color_display"></div>
+        <div class="color_codes">
+            <p>HEX:</p><p class="hex_code">Some code here</p>
+            <p>RGB:</p><p class="rgb_code"></p>
+            <p>HSL:</p><p class="hsl_code"></p>
+        </div>
+    </div>
     <script src="script.js"></script>
 </body>
+
 </html>
