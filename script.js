@@ -15,18 +15,20 @@ function getColor() {
 }
 
 function showColor() {
-    // console.log(getColor());
-    let hexString = getColor()
-    displayColor(hexString);
-    showHexColor(hexString);
+
+    let hexString = getColor();
     let rgbValue = hexToRGB(hexString);
-    showRBGColor(rgbValue);
+    let hexValue = rgbToHEX(rgbValue);
     let hslValue = rgbToHSL(rgbValue);
+    displayColor(hexValue);
+    showHexColor(hexValue);
+    showRBGColor(rgbValue);
     showHSLColor(hslValue);
+  
 }
 
-function displayColor(hexString) {
-    document.querySelector(".color_display").style.backgroundColor = hexString;
+function displayColor(hexValue) {
+    document.querySelector(".color_display").style.backgroundColor = hexValue;
 }
 
 function showHexColor(hexValue) {
@@ -42,14 +44,14 @@ function showHSLColor(hslColor) {
     let h = (hslColor.h.toFixed()).toString();
     let s = (hslColor.s.toFixed()).toString();
     let l = (hslColor.l.toFixed()).toString();
-    
+
     document.querySelector(".hsl_code").innerHTML = `${h}. ${s}%, ${l}%`;
 }
 
 function hexToRGB(hexString) {
     hexString.replaceAll(" ", "");
 
-    console.log(hexString);
+    // console.log(hexString);
     let r = parseInt(hexString.substring(1, 3), 16);
     let g = parseInt(hexString.substring(3, 5), 16);
     let b = parseInt(hexString.substring(5), 16);
@@ -61,17 +63,41 @@ function hexToRGB(hexString) {
     };
 }
 
-// function rgbToCssColor() {}
+function rgbToCssColor(rgbObject) {
+    let r = rgbObject.r;
+    let g = rgbObject.g;
+    let b = rgbObject.b;
 
-// function rgbToHEX() {}
+    return `rgb(${r}, ${g}, ${b})`
+}
+
+function rgbToHEX(rgbObject) {
+
+    let redHexValue = rgbObject.r.toString(16);
+    if (redHexValue.length == 1) {
+        redHexValue = "0" + redHexValue;
+    }
+    let greenHexValue = rgbObject.g.toString(16);
+    if (greenHexValue.length == 1) {
+        greenHexValue = "0" + greenHexValue;
+    }
+    let blueHexValue = rgbObject.b.toString(16);
+    if (blueHexValue.length == 1) {
+        blueHexValue = "0" + blueHexValue;
+    }
+
+    let hexString = '#' + redHexValue + greenHexValue + blueHexValue;
+    
+    return hexString;
+
+}
 
 function rgbToHSL(rgbValue) {
-    // console.log(rgbValue);
-    
+
     let r = rgbValue.r;
     let g = rgbValue.g;
     let b = rgbValue.b;
-    
+
     r /= 255;
     g /= 255;
     b /= 255;
@@ -109,6 +135,10 @@ function rgbToHSL(rgbValue) {
     s *= 100;
     l *= 100;
 
-    console.log("hsl(%f,%f%,%f%)", h, s, l); // just for testing
-    return {h ,s , l}
+    // console.log("hsl(%f,%f%,%f%)", h, s, l); // just for testing
+    return {
+        h,
+        s,
+        l
+    }
 }
